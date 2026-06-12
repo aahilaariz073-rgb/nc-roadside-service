@@ -14,8 +14,18 @@
   ];
 
   const AREAS = [
-    "Charlotte","Belmont","Concord","Gastonia","Matthews","Mint Hill",
-    "Pineville","Huntersville","Harrisburg","Stallings","Weddington","Salisbury"
+    {label:"Charlotte",   slug:"area-charlotte-nc.html"},
+    {label:"Belmont",     slug:"area-belmont-nc.html"},
+    {label:"Concord",     slug:"area-concord-nc.html"},
+    {label:"Gastonia",    slug:"area-gastonia-nc.html"},
+    {label:"Matthews",    slug:"area-matthews-nc.html"},
+    {label:"Mint Hill",   slug:"area-mint-hill-nc.html"},
+    {label:"Pineville",   slug:"area-pineville-nc.html"},
+    {label:"Huntersville",slug:"area-huntersville-nc.html"},
+    {label:"Harrisburg",  slug:"area-harrisburg-nc.html"},
+    {label:"Stallings",   slug:"area-stallings-nc.html"},
+    {label:"Weddington",  slug:"area-weddington-nc.html"},
+    {label:"Salisbury",   slug:"area-salisbury-nc.html"},
   ];
 
   const SERVICES = [
@@ -77,7 +87,7 @@
   /* ── Service Areas dropdown ── */
   function buildAreaDrop() {
     const cities = AREAS.map(a => `
-      <a class="drop-area-item" href="service-areas.html">${I.pin_sm}${a}</a>`).join("");
+      <a class="drop-area-item" href="${a.slug}">${I.pin_sm}${a.label}</a>`).join("");
     return `
     <div class="nav-drop area-drop" role="menu">
       <div class="drop-head">
@@ -154,7 +164,7 @@
   function buildFooter() {
     const y = new Date().getFullYear();
     const svc = SVC_ITEMS.map(s => `<li><a href="${s.href}">${s.label}</a></li>`).join("");
-    const ar = AREAS.map(a => `<li><a href="service-areas.html">${a}, NC</a></li>`).join("");
+    const ar = AREAS.map(a => `<li><a href="${a.slug}">${a.label}, NC</a></li>`).join("");
     return `
     <footer class="site-footer" itemscope itemtype="https://schema.org/AutomotiveBusiness">
       <div class="wrap">
