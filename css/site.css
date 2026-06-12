@@ -137,6 +137,58 @@ h1,h2,h3{font-family:'Barlow',sans-serif;font-weight:800;letter-spacing:-.01em;l
   .menu-btn{display:flex}
 }
 
+/* ========== dropdown mega-menus ========== */
+.nav-has-drop{position:relative}
+.nav-drop-trigger{display:inline-flex;align-items:center;gap:5px}
+.nav-drop-trigger svg{opacity:.45;transition:transform .2s var(--ease),opacity .2s}
+.nav-has-drop:hover .nav-drop-trigger svg,.nav-has-drop:focus-within .nav-drop-trigger svg{transform:rotate(180deg);opacity:.75}
+
+.nav-drop{
+  position:absolute;top:calc(100% + 14px);left:50%;
+  transform:translateX(-50%) translateY(8px);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 28px 64px -16px rgba(20,18,15,.18),0 0 0 .5px rgba(20,18,15,.06);
+  opacity:0;pointer-events:none;
+  transition:opacity .22s var(--ease),transform .22s var(--ease);
+  z-index:100;overflow:hidden;
+}
+/* bridge gap so mouse moving from trigger to menu doesn't dismiss */
+.nav-drop::before{content:"";position:absolute;top:-16px;left:0;right:0;height:16px}
+.nav-has-drop:hover .nav-drop,
+.nav-has-drop:focus-within .nav-drop{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+
+/* shared drop header / footer */
+.drop-head{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 12px;border-bottom:1px solid var(--line)}
+.drop-eyebrow{font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t-low)}
+.drop-viewall{font-size:13px;font-weight:700;color:var(--amber-deep);transition:color .15s}
+.drop-viewall:hover{color:var(--amber)}
+.drop-foot{display:flex;justify-content:space-between;align-items:center;padding:11px 20px;border-top:1px solid var(--line);background:var(--surface-2)}
+.drop-foot span{font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--t-low)}
+.drop-foot a{font-size:12.5px;font-weight:700;color:var(--amber-deep);transition:color .15s;white-space:nowrap}
+.drop-foot a:hover{color:var(--amber)}
+
+/* services mega-menu */
+.svc-drop{width:580px}
+.drop-svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+.drop-svc-item{display:flex;align-items:flex-start;gap:13px;padding:15px 20px;background:var(--surface);transition:background .15s;text-decoration:none}
+.drop-svc-item:hover{background:var(--surface-2)}
+.dsi-ico{width:34px;height:34px;border:1px solid var(--line-2);border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none;background:var(--surface)}
+.dsi-ico svg{width:17px;height:17px;stroke:var(--amber);fill:none;stroke-width:1.5}
+.drop-svc-item:hover .dsi-ico{border-color:var(--amber-soft);background:var(--amber-soft)}
+.dsi-text b{display:block;font-size:13.5px;font-weight:700;color:var(--t-hi);line-height:1.2;transition:color .15s}
+.dsi-text span{display:block;font-size:12px;color:var(--t-low);margin-top:2px;line-height:1.4}
+.drop-svc-item:hover .dsi-text b{color:var(--amber-deep)}
+
+/* areas dropdown */
+.area-drop{width:400px}
+.drop-area-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line)}
+.drop-area-item{display:flex;align-items:center;gap:7px;padding:12px 14px;background:var(--surface);font-size:13.5px;font-weight:600;color:var(--t-mid);transition:background .15s,color .15s;text-decoration:none}
+.drop-area-item:hover{background:var(--surface-2);color:var(--amber-deep)}
+.drop-area-item svg{width:12px;height:12px;stroke:var(--amber);fill:none;stroke-width:2;flex:none;transition:stroke .15s}
+.drop-area-item:hover svg{stroke:var(--amber-deep)}
+
 /* mobile drawer */
 .drawer{position:fixed;inset:0;z-index:80;background:var(--bg);transform:translateX(100%);transition:transform .34s var(--ease);display:flex;flex-direction:column;padding:24px var(--gut)}
 .drawer.open{transform:none}

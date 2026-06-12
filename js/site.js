@@ -1,32 +1,55 @@
 /* ============================================================
    NC ROADSIDE SERVICE — shared site behaviour
-   Renders header + footer, handles nav, reveals, form.
    ============================================================ */
 (function () {
   const PHONE = "(704) 594-5353";
   const TEL = "+17045945353";
 
   const NAV = [
-    { label: "Home", href: "index.html", n: "01" },
-    { label: "Services", href: "services.html", n: "02" },
-    { label: "Service Areas", href: "service-areas.html", n: "03" },
-    { label: "About", href: "about.html", n: "04" },
-    { label: "Contact", href: "contact.html", n: "05" },
+    { label: "Home",          href: "index.html",        n: "01" },
+    { label: "Services",      href: "services.html",     n: "02", drop: "svc" },
+    { label: "Service Areas", href: "service-areas.html",n: "03", drop: "area" },
+    { label: "About",         href: "about.html",        n: "04" },
+    { label: "Contact",       href: "contact.html",      n: "05" },
   ];
 
-  const AREAS = ["Charlotte","Belmont","Concord","Gastonia","Matthews","Mint Hill",
-    "Pineville","Huntersville","Harrisburg","Stallings","Weddington","Salisbury"];
+  const AREAS = [
+    "Charlotte","Belmont","Concord","Gastonia","Matthews","Mint Hill",
+    "Pineville","Huntersville","Harrisburg","Stallings","Weddington","Salisbury"
+  ];
 
-  const SERVICES = ["Jump Starts & Battery","Flat Tire Change","Fuel Delivery","Lockout Service",
-    "Winch-Out & Recovery","Mobile Tire Repair","Mobile Mechanic","Fleet & Commercial"];
+  const SERVICES = [
+    "Jump Starts & Battery","Flat Tire Change","Fuel Delivery","Lockout Service",
+    "Winch-Out & Recovery","Mobile Tire Repair","Mobile Mechanic","Fleet & Commercial"
+  ];
 
-  // crafted inline icons (no emoji)
+  /* service items with icons + one-liners for the mega-menu */
+  const SVC_ITEMS = [
+    { href:"service-jump-start.html",    label:"Jump Starts & Battery",  desc:"Dead battery? Boosted or swapped on the spot.",
+      ico:'<svg viewBox="0 0 24 24"><path d="M7 7h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M22 10v4M9 8l-1 4h3l-1 4"/></svg>' },
+    { href:"service-flat-tire.html",     label:"Flat Tire Change",        desc:"Spare mounted & torqued to spec, fast.",
+      ico:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>' },
+    { href:"service-fuel-delivery.html", label:"Fuel Delivery",           desc:"Out of gas? We bring enough to reach the pump.",
+      ico:'<svg viewBox="0 0 24 24"><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M3 21h14"/><path d="M15 9h2.5a1.5 1.5 0 0 1 1.5 1.5V16a2 2 0 0 0 2 2 2 2 0 0 0 2-2V8l-3-3"/></svg>' },
+    { href:"service-lockout.html",       label:"Lockout Service",         desc:"Keys locked in? Back inside with zero damage.",
+      ico:'<svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' },
+    { href:"service-winch-out.html",     label:"Winch-Out & Recovery",    desc:"Ditch, mud or snow — we pull you right out.",
+      ico:'<svg viewBox="0 0 24 24"><path d="M3 7h7l3 4M3 7v8h2"/><circle cx="8" cy="17" r="2"/><path d="M10 17h5"/><path d="M17 5a3 3 0 1 1-.1 6"/><path d="M14 8h3"/></svg>' },
+    { href:"service-tire-repair.html",   label:"Mobile Tire Repair",      desc:"Plug, patch or replace at your exact location.",
+      ico:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4"/><circle cx="12" cy="12" r="2"/></svg>' },
+    { href:"service-mobile-mechanic.html",label:"Mobile Mechanic",        desc:"On-site diagnostics and minor repairs.",
+      ico:'<svg viewBox="0 0 24 24"><path d="M14.5 5.5a3.5 3.5 0 0 0-4.9 4.2L4 15.3 7.7 19l5.6-5.6a3.5 3.5 0 0 0 4.2-4.9l-2.3 2.3-2-2 2.3-2.3Z"/></svg>' },
+    { href:"service-fleet.html",         label:"Fleet & Commercial",      desc:"Priority accounts for business fleets.",
+      ico:'<svg viewBox="0 0 24 24"><path d="M3 14V6a1 1 0 0 1 1-1h10v9M14 8h3.5l2.5 3v3h-2"/><path d="M2 14h12"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>' },
+  ];
+
   const I = {
     phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2.1Z"/></svg>',
     pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
     clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
-    mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
     menu:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
+    chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="m6 9 6 6 6-6"/></svg>',
+    pin_sm:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>',
   };
 
   function currentFile() {
@@ -34,11 +57,65 @@
     return p && p.length ? p : "index.html";
   }
 
+  /* ── Services mega-menu ── */
+  function buildSvcDrop() {
+    const grid = SVC_ITEMS.map(s => `
+      <a class="drop-svc-item" href="${s.href}">
+        <span class="dsi-ico">${s.ico}</span>
+        <span class="dsi-text"><b>${s.label}</b><span>${s.desc}</span></span>
+      </a>`).join("");
+    return `
+    <div class="nav-drop svc-drop" role="menu">
+      <div class="drop-head">
+        <span class="drop-eyebrow">24/7 Emergency Services</span>
+        <a href="services.html" class="drop-viewall">View all services →</a>
+      </div>
+      <div class="drop-svc-grid">${grid}</div>
+      <div class="drop-foot">
+        <span>${I.phone} Call to get an instant quote — (704) 594-5353</span>
+        <a href="contact.html">Request online →</a>
+      </div>
+    </div>`;
+  }
+
+  /* ── Service Areas dropdown ── */
+  function buildAreaDrop() {
+    const cities = AREAS.map(a => `
+      <a class="drop-area-item" href="service-areas.html">${I.pin_sm}${a}</a>`).join("");
+    return `
+    <div class="nav-drop area-drop" role="menu">
+      <div class="drop-head">
+        <span class="drop-eyebrow">Greater Charlotte Metro, NC</span>
+        <a href="service-areas.html" class="drop-viewall">Coverage map →</a>
+      </div>
+      <div class="drop-area-grid">${cities}</div>
+      <div class="drop-foot">
+        <span>On a road between cities? We still come to you.</span>
+        <a href="service-areas.html">View all 12 areas →</a>
+      </div>
+    </div>`;
+  }
+
   function buildHeader() {
     const cur = currentFile();
     const isServiceDetail = cur.indexOf("service-") === 0 && cur !== "service-areas.html";
     const isActive = (href) => href === cur || (href === "services.html" && isServiceDetail);
-    const links = NAV.map(x => `<a href="${x.href}" class="${isActive(x.href) ? "active" : ""}">${x.label}</a>`).join("");
+
+    const links = NAV.map(x => {
+      const cls = isActive(x.href) ? " active" : "";
+      if (x.drop === "svc") return `
+        <span class="nav-has-drop">
+          <a href="${x.href}" class="nav-drop-trigger${cls}" aria-haspopup="true">${x.label}${I.chev}</a>
+          ${buildSvcDrop()}
+        </span>`;
+      if (x.drop === "area") return `
+        <span class="nav-has-drop">
+          <a href="${x.href}" class="nav-drop-trigger${cls}" aria-haspopup="true">${x.label}${I.chev}</a>
+          ${buildAreaDrop()}
+        </span>`;
+      return `<a href="${x.href}" class="${cls.trim()}">${x.label}</a>`;
+    }).join("");
+
     const drawerLinks = NAV.map(x => `<a href="${x.href}"><span>${x.n}</span>${x.label}</a>`).join("");
 
     return `
@@ -57,7 +134,7 @@
           <img class="mark" src="assets/logo.png" alt="NC Roadside Service LLC logo">
           <span class="bt"><b>NC Roadside Service<i>LLC</i></b></span>
         </a>
-        <nav class="nav-main">${links}</nav>
+        <nav class="nav-main" role="navigation" aria-label="Main navigation">${links}</nav>
         <div class="header-cta">
           <a class="header-phone" href="tel:${TEL}"><b>${PHONE}</b></a>
           <a href="contact.html" class="btn btn-amber">Request Service</a>
@@ -65,33 +142,36 @@
         </div>
       </div>
     </header>
-    <div class="drawer" id="drawer">
+    <div class="drawer" id="drawer" aria-hidden="true">
       <div class="d-top">
-        <a href="index.html" class="brand"><img class="mark" src="assets/logo.png" alt=""><span class="bt"><b>NC Roadside Service<i>LLC</i></b></span></a>
+        <a href="index.html" class="brand"><img class="mark" src="assets/logo.png" alt="NC Roadside Service LLC"><span class="bt"><b>NC Roadside Service<i>LLC</i></b></span></a>
         <button class="d-close" id="drawerClose" aria-label="Close menu">&times;</button>
       </div>
       <nav>${drawerLinks}</nav>
-      <div class="d-cta"><a href="tel:${TEL}" class="btn btn-amber btn-lg btn-block">${I.phone} Call ${PHONE}</a></div>
+      <div class="d-cta">
+        <a href="tel:${TEL}" class="btn btn-amber btn-lg btn-block">${I.phone} Call ${PHONE}</a>
+        <a href="contact.html" class="btn btn-line btn-lg btn-block" style="margin-top:10px">Request Service Online</a>
+      </div>
     </div>`;
   }
 
   function buildFooter() {
     const y = new Date().getFullYear();
-    const svc = SERVICES.map(s => `<li><a href="services.html">${s}</a></li>`).join("");
+    const svc = SVC_ITEMS.map(s => `<li><a href="${s.href}">${s.label}</a></li>`).join("");
     const ar = AREAS.map(a => `<li><a href="service-areas.html">${a}, NC</a></li>`).join("");
     return `
-    <footer class="site-footer">
+    <footer class="site-footer" itemscope itemtype="https://schema.org/AutomotiveBusiness">
       <div class="wrap">
         <div class="footer-top">
           <div class="footer-brand">
             <a href="index.html" class="brand">
-              <img class="mark" src="assets/logo.png" alt="NC Roadside Service LLC">
+              <img class="mark" src="assets/logo.png" alt="NC Roadside Service LLC" itemprop="logo">
               <span class="bt"><b>NC Roadside Service<i>LLC</i></b></span>
             </a>
-            <p>24/7 emergency roadside assistance for drivers and fleets across the greater Charlotte metro. Fast, fair, and always one call away.</p>
+            <p itemprop="description">24/7 emergency roadside assistance for drivers and fleets across the greater Charlotte metro — jump starts, tires, lockouts, fuel, recovery, and mobile mechanic. Fast, fair, always one call away.</p>
           </div>
           <div class="foot-col">
-            <h4>Services</h4>
+            <h4>Our Services</h4>
             <ul>${svc}</ul>
           </div>
           <div class="foot-col">
@@ -99,18 +179,18 @@
             <ul>${ar}</ul>
           </div>
           <div class="foot-col">
-            <h4>Contact</h4>
+            <h4>Reach Us</h4>
             <div class="foot-nap">
-              <span class="np">${I.phone}<span><b><a href="tel:${TEL}">${PHONE}</a></b><br>24/7 emergency dispatch</span></span>
-              <span class="np">${I.pin}<span><b>Belmont, NC</b><br>Serving the Charlotte metro</span></span>
-              <span class="np">${I.clock}<span><b>Open 24 / 7</b><br>365 days a year</span></span>
+              <span class="np">${I.phone}<span><b><a href="tel:${TEL}" itemprop="telephone">${PHONE}</a></b><br>24/7 emergency dispatch</span></span>
+              <span class="np">${I.pin}<span><b itemprop="addressLocality">Belmont, NC</b><br>Serving the Charlotte metro</span></span>
+              <span class="np">${I.clock}<span><b>Open 24 / 7 / 365</b><br>No holidays, no hold music</span></span>
             </div>
-            <a href="contact.html" class="btn btn-line" style="margin-top:20px">Request Service</a>
+            <a href="contact.html" class="btn btn-line" style="margin-top:20px">Request a Free Quote</a>
           </div>
         </div>
         <div class="footer-bottom">
           <span>© ${y} NC ROADSIDE SERVICE LLC · ALL RIGHTS RESERVED</span>
-          <span>LICENSED &amp; INSURED · NC</span>
+          <span>LICENSED &amp; INSURED · SERVING CHARLOTTE METRO, NC</span>
         </div>
       </div>
     </footer>
@@ -123,36 +203,45 @@
     if (h) h.innerHTML = buildHeader();
     if (f) f.innerHTML = buildFooter();
 
-    // shrink header on scroll
+    /* shrink header on scroll */
     const header = document.getElementById("siteHeader");
     const onScroll = () => { if (header) header.classList.toggle("shrink", window.scrollY > 30); };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // drawer
+    /* mobile drawer */
     const drawer = document.getElementById("drawer");
     const mb = document.getElementById("menuBtn");
     const dc = document.getElementById("drawerClose");
-    if (mb) mb.addEventListener("click", () => drawer.classList.add("open"));
-    if (dc) dc.addEventListener("click", () => drawer.classList.remove("open"));
-    if (drawer) drawer.querySelectorAll("nav a").forEach(a => a.addEventListener("click", () => drawer.classList.remove("open")));
+    if (mb) mb.addEventListener("click", () => { drawer.classList.add("open"); drawer.setAttribute("aria-hidden","false"); });
+    if (dc) dc.addEventListener("click", () => { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); });
+    if (drawer) drawer.querySelectorAll("nav a").forEach(a => a.addEventListener("click", () => { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true"); }));
 
-    // reveals
+    /* close dropdowns when clicking outside */
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".nav-has-drop")) {
+        document.querySelectorAll(".nav-drop").forEach(d => d.classList.remove("open"));
+      }
+    });
+
+    /* keyboard: Escape closes any open dropdown */
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") document.querySelectorAll(".nav-drop").forEach(d => d.classList.remove("open"));
+    });
+
+    /* scroll reveals */
     const io = new IntersectionObserver((es) => {
       es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll("[data-reveal]").forEach(el => io.observe(el));
 
-    // request form
+    /* request form */
     document.querySelectorAll("form[data-request]").forEach(form => {
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const scope = form.closest(".form-card") || form.parentElement;
         const ok = scope ? scope.querySelector("[data-ok]") : null;
-        if (ok) {
-          form.style.display = "none";
-          ok.style.display = "flex";
-        }
+        if (ok) { form.style.display = "none"; ok.style.display = "flex"; }
       });
     });
   }
