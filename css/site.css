@@ -163,6 +163,9 @@ h1,h2,h3{font-family:'Barlow',sans-serif;font-weight:800;letter-spacing:-.01em;l
 .photo .tick.tr{top:12px;right:12px;border-width:1px 1px 0 0}
 .photo .tick.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
 .photo .tick.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
+/* real photo slots */
+.photo.has-photo .ph-icon,.photo.has-photo .ph-label{display:none}
+.photo.has-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 
 /* ---------- reveal animation ---------- */
 [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
