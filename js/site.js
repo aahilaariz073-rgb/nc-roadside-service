@@ -71,10 +71,6 @@
         <a href="services.html" class="drop-viewall">View all services →</a>
       </div>
       <div class="drop-svc-grid">${grid}</div>
-      <div class="drop-foot">
-        <span>${I.phone} Call to get an instant quote — (704) 594-5353</span>
-        <a href="contact.html">Request online →</a>
-      </div>
     </div>`;
   }
 
