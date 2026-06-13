@@ -95,10 +95,6 @@
         <a href="service-areas.html" class="drop-viewall">Coverage map →</a>
       </div>
       <div class="drop-area-grid">${cities}</div>
-      <div class="drop-foot">
-        <span>On a road between cities? We still come to you.</span>
-        <a href="service-areas.html">View all 12 areas →</a>
-      </div>
     </div>`;
   }
 
