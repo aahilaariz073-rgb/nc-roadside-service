@@ -46,6 +46,14 @@
 .iblock .chips span{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.04em;color:var(--t-mid);border:1px solid var(--line);border-radius:100px;padding:5px 10px}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
 @media(max-width:520px){.frow{grid-template-columns:1fr}}
+/* Prevent iOS auto-zoom on form focus (requires 16px minimum) */
+@media(max-width:768px){
+  .field input,.field select,.field textarea{font-size:16px}
+}
+/* Make form submit button extra prominent on mobile */
+@media(max-width:520px){
+  .form-card .submit{padding:18px 24px;font-size:17px}
+}
 </style>
 </head>
 <body>
