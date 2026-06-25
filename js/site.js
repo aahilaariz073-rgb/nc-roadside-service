@@ -10,7 +10,8 @@
     { label: "Services",      href: "services.html",     n: "02", drop: "svc" },
     { label: "Service Areas", href: "service-areas.html",n: "03", drop: "area" },
     { label: "About",         href: "about.html",        n: "04" },
-    { label: "Contact",       href: "contact.html",      n: "05" },
+    { label: "Blog",          href: "blog.html",         n: "05" },
+    { label: "Contact",       href: "contact.html",      n: "06" },
   ];
 
   const AREAS = [
