@@ -252,3 +252,69 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
+/* ===== GHL Lead Popup (added separately) ===== */
+(function(){
+  var DELAY = 4000;            // 4 seconds
+  var ONCE_KEY = "ncrs_lead_popup_seen";
+
+  function buildPopup(){
+    // don't show if already seen this session, or if a popup already exists
+    try { if (sessionStorage.getItem(ONCE_KEY)) return; } catch(e){}
+    if (document.getElementById("ncrs-lead-overlay")) return;
+
+    // inject styles once
+    if (!document.getElementById("ncrs-lead-styles")){
+      var st = document.createElement("style");
+      st.id = "ncrs-lead-styles";
+      st.textContent =
+        "#ncrs-lead-overlay{position:fixed;inset:0;background:rgba(10,15,25,.72);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .25s ease}"+
+        "#ncrs-lead-overlay.show{opacity:1}"+
+        "#ncrs-lead-box{position:relative;background:#fff;border-radius:14px;width:100%;max-width:480px;max-height:90vh;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4);transform:translateY(12px);transition:transform .25s ease}"+
+        "#ncrs-lead-overlay.show #ncrs-lead-box{transform:translateY(0)}"+
+        "#ncrs-lead-head{background:#142A47;color:#fff;padding:18px 22px;font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.02em;text-transform:uppercase}"+
+        "#ncrs-lead-head small{display:block;font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.1em;color:#F4BC3F;margin-top:4px;text-transform:uppercase;font-weight:400}"+
+        "#ncrs-lead-close{position:absolute;top:12px;right:14px;width:32px;height:32px;border:none;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:1;cursor:pointer;z-index:2}"+
+        "#ncrs-lead-close:hover{background:rgba(255,255,255,.32)}"+
+        "#ncrs-lead-body{padding:0}"+
+        "#ncrs-lead-body iframe{width:100%;height:560px;border:none;display:block}";
+      document.head.appendChild(st);
+    }
+
+    var overlay = document.createElement("div");
+    overlay.id = "ncrs-lead-overlay";
+    overlay.innerHTML =
+      '<div id="ncrs-lead-box">'+
+        '<button id="ncrs-lead-close" aria-label="Close">&times;</button>'+
+        '<div id="ncrs-lead-head">Truck down? Get help fast.<small>24/7 &middot; Charlotte Metro &middot; (704) 594-5353</small></div>'+
+        '<div id="ncrs-lead-body">'+
+          '<iframe src="https://api.leadconnectorhq.com/widget/form/kVCI4tPfHr2SxUpttvbl" '+
+          'id="inline-kVCI4tPfHr2SxUpttvbl" title="NC Roadside Services" '+
+          'data-form-id="kVCI4tPfHr2SxUpttvbl"></iframe>'+
+        '</div>'+
+      '</div>';
+    document.body.appendChild(overlay);
+
+    // load GHL embed script once
+    if (!document.getElementById("ncrs-ghl-embed")){
+      var sc = document.createElement("script");
+      sc.id = "ncrs-ghl-embed";
+      sc.src = "https://link.msgsndr.com/js/form_embed.js";
+      document.body.appendChild(sc);
+    }
+
+    requestAnimationFrame(function(){ overlay.classList.add("show"); });
+
+    function close(){
+      overlay.classList.remove("show");
+      try { sessionStorage.setItem(ONCE_KEY, "1"); } catch(e){}
+      setTimeout(function(){ if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 280);
+    }
+    document.getElementById("ncrs-lead-close").addEventListener("click", close);
+    overlay.addEventListener("click", function(e){ if (e.target === overlay) close(); });
+    document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+  }
+
+  function start(){ setTimeout(buildPopup, DELAY); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+})();
