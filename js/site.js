@@ -276,7 +276,7 @@
         "#ncrs-lead-close{position:absolute;top:12px;right:14px;width:32px;height:32px;border:none;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:1;cursor:pointer;z-index:2}"+
         "#ncrs-lead-close:hover{background:rgba(255,255,255,.32)}"+
         "#ncrs-lead-body{padding:0}"+
-        "#ncrs-lead-body iframe{width:100%;height:560px;border:none;display:block}";
+        "#ncrs-lead-body iframe{width:100%;height:900px;border:none;display:block}";
       document.head.appendChild(st);
     }
 
