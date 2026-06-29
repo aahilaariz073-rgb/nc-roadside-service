@@ -275,7 +275,7 @@
         "#ncrs-lead-head small{display:block;font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.1em;color:#F4BC3F;margin-top:4px;text-transform:uppercase;font-weight:400}"+
         "#ncrs-lead-close{position:absolute;top:12px;right:14px;width:32px;height:32px;border:none;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:1;cursor:pointer;z-index:2}"+
         "#ncrs-lead-close:hover{background:rgba(255,255,255,.32)}"+
-        "#ncrs-lead-body{padding:0}"+
+     "#ncrs-lead-body{padding:0;overflow-y:auto;max-height:80vh}"+
         "#ncrs-lead-body iframe{width:100%;height:900px;border:none;display:block}";
       document.head.appendChild(st);
     }
