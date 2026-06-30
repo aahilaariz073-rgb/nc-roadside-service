@@ -144,7 +144,15 @@
 @media(max-width:900px){.rev-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
 @media(max-width:520px){.rev{padding:22px 18px}.rev p{font-size:15px}}
 
-/* ===== CTA band ===== */
+.rev-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.g-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--t-low)}
+.rev{display:flex;flex-direction:column;text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+.rev:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(20,18,15,.4);border-color:var(--line-2)}
+.rev p{flex:1}
+.rev-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:clamp(28px,4vw,40px)}
+@media(max-width:520px){.rev-cta .btn{width:100%}}
+  /* ===== CTA band ===== */
+  
 .cta-band{position:relative;background:linear-gradient(135deg,var(--amber-hi),var(--amber-deep));color:#fff;overflow:hidden}
 .cta-band::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(0,0,0,.07) 0 16px,transparent 16px 44px)}
 .cta-band .wrap{position:relative;text-align:center;padding:clamp(56px,8vw,96px) var(--gut)}
@@ -631,6 +639,33 @@
   ]
 }
 </script>
+
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AutoRepair",
+  "name":"NC Roadside Service LLC",
+  "image":"https://www.ncroadsideservice.com/assets/logo.png",
+  "telephone":"+1-704-594-5353",
+  "url":"https://www.ncroadsideservice.com/",
+  "areaServed":"Charlotte Metro, NC",
+  "aggregateRating":{
+    "@type":"AggregateRating",
+    "ratingValue":"4.8",
+    "reviewCount":"60",
+    "bestRating":"5",
+    "worstRating":"1"
+  },
+  "review":[
+    {"@type":"Review","author":{"@type":"Person","name":"Roger Tobias"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Good shop, went above and beyond to get truck off road and priced correctly."},
+    {"@type":"Review","author":{"@type":"Person","name":"Jackline Birungi"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"They got my truck moving in just an hour."},
+    {"@type":"Review","author":{"@type":"Person","name":"Dieuveut Sampeur"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Fast service and fair prices, will use them again."},
+    {"@type":"Review","author":{"@type":"Person","name":"Michelle"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Fixed the crack in my windshield with a fast response time."},
+    {"@type":"Review","author":{"@type":"Person","name":"David Anderson"},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Very good."}
+  ]
+}
+</script>  
 </body>
 </html>
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3188e30e84ef9ef94c9952"></script>
