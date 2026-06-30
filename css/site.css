@@ -111,16 +111,16 @@ h1,h2,h3{font-family:'Barlow',sans-serif;font-weight:800;letter-spacing:-.01em;l
 
 /* ---------- header ---------- */
 .site-header{position:sticky;top:0;z-index:60;background:rgba(251,250,247,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:padding .25s var(--ease)}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:92px;transition:height .25s var(--ease)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;height:92px;transition:height .25s var(--ease)}
 .site-header.shrink .wrap{height:74px}
-.brand{display:flex;align-items:center;gap:15px}
-.brand .mark{height:68px;width:68px;border-radius:11px;object-fit:cover;background:var(--chip);border:1px solid var(--line);transition:height .25s,width .25s}
+.brand{display:flex;align-items:center;gap:14px;flex:0 0 auto}
+.brand .mark{height:62px;width:62px;border-radius:11px;object-fit:cover;background:var(--chip);border:1px solid var(--line);transition:height .25s,width .25s}
 .site-header.shrink .brand .mark{height:54px;width:54px}
 .brand .bt{line-height:1}
-.brand .bt b{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:27px;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:baseline;gap:9px;color:var(--t-hi)}
+.brand .bt b{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:25px;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:baseline;gap:9px;color:var(--t-hi)}
 .brand .bt b i{font-style:normal;font-family:inherit;font-size:inherit;letter-spacing:inherit;font-weight:inherit;color:inherit;transform:none}
 .site-header.shrink .brand .bt b{font-size:23px}
-.nav-main{display:flex;align-items:center;gap:4px}
+.nav-main{display:flex;align-items:center;gap:4px;flex:0 1 auto;margin-left:auto}
 .nav-main a{font-weight:600;font-size:14.5px;color:var(--t-mid);padding:9px 14px;border-radius:8px;transition:color .15s,background .15s;position:relative}
 .nav-main a:hover{color:var(--t-hi)}
 .nav-main a.active{color:var(--t-hi)}
@@ -230,9 +230,9 @@ h1,h2,h3{font-family:'Barlow',sans-serif;font-weight:800;letter-spacing:-.01em;l
 
 /* ---------- footer (light, tinted) ---------- */
 .site-footer{background:var(--surface-2);border-top:1px solid var(--line);padding-top:clamp(56px,7vw,88px)}
-.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:clamp(40px,5vw,64px)}
 .footer-brand .brand{margin-bottom:20px}
-.footer-brand p{color:var(--t-mid);font-size:14.5px;max-width:320px}
+.footer-brand p{color:var(--t-mid);font-size:14.5px;line-height:1.6;max-width:340px}
 .foot-col h4{font-family:'Spline Sans Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t-low);margin-bottom:18px;font-weight:500}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .foot-col ul a{color:var(--t-mid);font-size:14.5px;transition:color .15s}
@@ -314,6 +314,13 @@ h1,h2,h3{font-family:'Barlow',sans-serif;font-weight:800;letter-spacing:-.01em;l
 @media(max-width:380px){
   .drawer{padding:18px 16px}
   .drawer nav a{font-size:24px;padding:14px 0}
+}
+
+/* ── Smallest phones: keep brand name on one line ── */
+@media(max-width:360px){
+  .brand .bt b{font-size:18px;gap:6px}
+  .brand{gap:10px}
+  .brand .mark{height:44px;width:44px}
 }
 
 /* ── Hero CTA buttons: stack full-width on small screens ── */
