@@ -215,5 +215,17 @@
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
+        <url>
+    <loc>https://www.ncroadsideservice.com/blog-emergency-fuel-delivery-charlotte.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.ncroadsideservice.com/blog-forced-regen-truck-charlotte.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
 
 </urlset>
